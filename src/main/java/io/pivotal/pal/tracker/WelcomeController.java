@@ -13,4 +13,10 @@ public class WelcomeController {
         return "hello";
     }
 
+    @GetMapping("/surf")
+    public String getSurf() {
+
+        return "surfs up!!!!";
+    }
+
 }
