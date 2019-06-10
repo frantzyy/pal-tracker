@@ -17,6 +17,6 @@ cf start pal-tracker
 * Restage app (used to pick up env changes"
 cf restage pal-tracker
 
-
+cf set-env pal-tracker WELCOME_MESSAGE 'hellofrompal'
 
 
