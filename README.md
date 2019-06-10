@@ -1,5 +1,8 @@
-# Useful cmmmands
+# Useful commands
 
+
+* Create jar to deploy
+./gradlew clean build
 
 * Deploy app
 cf push pal-tracker  -p ./build/libs/pal-tracker.jar --random-route
@@ -13,3 +16,7 @@ cf start pal-tracker
 
 * Restage app (used to pick up env changes"
 cf restage pal-tracker
+
+
+
+
