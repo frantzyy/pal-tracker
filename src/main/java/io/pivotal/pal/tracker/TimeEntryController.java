@@ -7,43 +7,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TimeEntryController {
+    private final TimeEntryRepository timeEntryRepository;
+
     public TimeEntryController(TimeEntryRepository timeEntryRepository) {
+        this.timeEntryRepository = timeEntryRepository;
     }
 
     public ResponseEntity create(TimeEntry timeEntryToCreate) {
 
-        ResponseEntity mockResponseEntity = new ResponseEntity(HttpStatus.CREATED);
+        TimeEntry newTimeEntryCreated = this.timeEntryRepository.create(timeEntryToCreate);
 
-        return mockResponseEntity;
+        ResponseEntity responseEntity = new ResponseEntity(newTimeEntryCreated, HttpStatus.CREATED);
+
+        return responseEntity;
     }
 
     public ResponseEntity<TimeEntry> read(long timeEntryId) {
 
-        ResponseEntity mockResponseEntity = new ResponseEntity(HttpStatus.FOUND);
 
-        return mockResponseEntity;
+        TimeEntry foundTimeEntry = this.timeEntryRepository.find(timeEntryId);
+
+        if(foundTimeEntry == null){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+
+        }else {
+            return new ResponseEntity(foundTimeEntry, HttpStatus.OK);
+
+        }
     }
 
     public ResponseEntity<List<TimeEntry>> list() {
 
+        List<TimeEntry> repoList  = this.timeEntryRepository.list();
 
-        List<TimeEntry> mockList = new ArrayList<>();
-
-        return new ResponseEntity<List<TimeEntry>>(mockList, HttpStatus.OK);
+        return new ResponseEntity<List<TimeEntry>>(repoList, HttpStatus.OK);
     }
 
-    public ResponseEntity update(long timeEntryId, TimeEntry expected) {
+    public ResponseEntity update(long timeEntryId, TimeEntry timeEntryToUpdate) {
 
-        ResponseEntity mockResponseEntity = new ResponseEntity(HttpStatus.OK);
+        TimeEntry newTimeEntryCreated = this.timeEntryRepository.update(timeEntryId, timeEntryToUpdate);
 
-        return mockResponseEntity;
+        if(newTimeEntryCreated == null){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }else {
+            return new ResponseEntity(newTimeEntryCreated, HttpStatus.OK);
+        }
     }
 
     public ResponseEntity delete(long timeEntryId) {
 
-        ResponseEntity mockResponseEntity = new ResponseEntity(HttpStatus.OK);
+       this.timeEntryRepository.delete(timeEntryId);
 
-        return mockResponseEntity;
+        ResponseEntity responseEntity = new ResponseEntity(HttpStatus.NO_CONTENT);
+
+        return responseEntity;
 
     }
 }

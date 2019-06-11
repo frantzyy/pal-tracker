@@ -1,60 +1,94 @@
 package io.pivotal.pal.tracker;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class TimeEntry {
 
-    private long timeEntryId;
+    private long id;
     private long projectId;
     private long userId;
     private LocalDate date;
     private int hours;
 
-    //create
-    public TimeEntry(long projectId, long userId, LocalDate parse, int id) {
+    //        TimeEntry createdTimeEntry = repo.create(new TimeEntry(projectId, userId, LocalDate.parse("2017-01-08"), 8));
+
+    //create without id
+    public TimeEntry(long projectId, long userId, LocalDate date, int hours) {
+
+
+
+        this.projectId = projectId;
+        this.userId = userId;
+        this.date = date;
+        this.hours = hours;
 
     }
 
-    public long getId() {
 
-        return timeEntryId;
+    //create with id
+    public TimeEntry(long id, long projectId, long userId, LocalDate date, int hours) {
+
+        this.projectId = projectId;
+        this.userId = userId;
+        this.date = date;
+        this.hours = hours;
+        this.id = id;
+
     }
 
-    //fetch
-    public TimeEntry(long timeEntryId, long projectId, long userId, LocalDate parse, int id) {
-
-    }
 
     public TimeEntry(){
 
     }
 
+
+    public long getId() {
+        return id;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TimeEntry timeEntry = (TimeEntry) o;
+        return id == timeEntry.id &&
+                projectId == timeEntry.projectId &&
+                userId == timeEntry.userId &&
+                hours == timeEntry.hours &&
+                date.equals(timeEntry.date);
+    }
 
-        //https://www.geeksforgeeks.org/overriding-equals-method-in-java/
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, projectId, userId, date, hours);
+    }
 
-        // If the object is compared with itself then return true
-        if (o == this) {
-            return true;
-        }
-
-        /* Check if o is an instance of Complex or not
-          "null instanceof [type]" also returns false */
-        if (!(o instanceof TimeEntry)) {
-            return false;
-        }
-
-        // typecast o to Complex so that we can compare data members
-        TimeEntry c = (TimeEntry) o;
-
-        // Compare the data members and return accordingly
-        return Long.compare(timeEntryId, c.timeEntryId) == 0
-                && Long.compare(projectId, c.projectId) == 0
-                && Long.compare(userId, c.userId) == 0
-                && date.compareTo(c.date) == 0
-                && Integer.compare(hours, c.hours) == 0;
-
+    @Override
+    public String toString() {
+        return "TimeEntry{" +
+                "id=" + id +
+                ", projectId=" + projectId +
+                ", userId=" + userId +
+                ", date=" + date +
+                ", hours=" + hours +
+                '}';
     }
 }
 

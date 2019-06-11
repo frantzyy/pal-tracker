@@ -1,57 +1,68 @@
 package io.pivotal.pal.tracker;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-public class InMemoryTimeEntryRepository {
+public class InMemoryTimeEntryRepository implements TimeEntryRepository{
 
-    private List<TimeEntry> inMemoryList;
+    private Map<Long,TimeEntry> timeEntryMap;
+    private int count;
+
+    public InMemoryTimeEntryRepository() {
+
+        this.timeEntryMap = new HashMap();
+        this.count = 1;
+
+    }
 
     public TimeEntry create(TimeEntry timeEntry) {
 
 
-//TEST CODE
-//        long projectId = 123L;
-//        long userId = 456L;
-//        TimeEntry createdTimeEntry = repo.create(new TimeEntry(projectId, userId, LocalDate.parse("2017-01-08"), 8));
-//
-//        long timeEntryId = 1L;
-//        TimeEntry expected = new TimeEntry(timeEntryId, projectId, userId, LocalDate.parse("2017-01-08"), 8);
-//        assertThat(createdTimeEntry).isEqualTo(expected);
+        TimeEntry ourSweetNewTimeEntry = new TimeEntry(generateID(), timeEntry.getProjectId(), timeEntry.getUserId(), timeEntry.getDate(), timeEntry.getHours());
+        this.timeEntryMap.put(ourSweetNewTimeEntry.getId(), ourSweetNewTimeEntry);
 
-
-        TimeEntry mockTimeEntry = new TimeEntry(1L, 123L, 456L, LocalDate.parse("2017-01-08"),8);
-
-
-        return mockTimeEntry;
+        return ourSweetNewTimeEntry;
 
     }
 
-    public TimeEntry update(long timeEntryId, TimeEntry timeEntry){
+    public TimeEntry update(long timeEntryId, TimeEntry timeEntry) {
 
-        long projectId = 123L;
-        long userId = 456L;
-        TimeEntry timeEntryToCreate = new TimeEntry(projectId, userId, LocalDate.parse("2017-01-08"), 8);
-        return timeEntryToCreate;
+        if(this.timeEntryMap.containsKey(timeEntryId)){
+            TimeEntry timeEntryToCreate = new TimeEntry(timeEntryId, timeEntry.getProjectId(), timeEntry.getUserId(), timeEntry.getDate(), timeEntry.getHours());
+            this.timeEntryMap.put(timeEntryToCreate.getId(), timeEntryToCreate);
+
+            return timeEntryToCreate;
+
+        }else {
+            return null;
+
+        }
+
+
 
     }
 
     public TimeEntry find(long timeEntryId) {
 
-        long projectId = 123L;
-        long userId = 456L;
-        TimeEntry timeEntryToCreate = new TimeEntry(projectId, userId, LocalDate.parse("2017-01-08"), 8);
-        return timeEntryToCreate;
+        return this.timeEntryMap.get(timeEntryId);
 
     }
 
-    public static void delete(long timeEntryId){
+    public void delete(long timeEntryId) {
+
+        this.timeEntryMap.remove(timeEntryId);
 
     }
 
     public List<TimeEntry> list() {
 
-        return inMemoryList;
+        return new ArrayList<>(this.timeEntryMap.values());
+    }
+
+
+    public long generateID() {
+
+        return this.count++;
+
     }
 }

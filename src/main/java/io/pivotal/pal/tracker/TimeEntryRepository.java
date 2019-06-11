@@ -1,26 +1,15 @@
 package io.pivotal.pal.tracker;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TimeEntryRepository {
-    public void create(TimeEntry any) {
-    }
+public interface TimeEntryRepository {
+    TimeEntry create(TimeEntry timeEntryToCreate);
 
-    public void find(long timeEntryId) {
-    }
+    TimeEntry find(long timeEntryId);
 
-    public List<TimeEntry> list() {
+    List<TimeEntry> list();
 
-        List<TimeEntry> mockList = new ArrayList<>();
+    TimeEntry update(long timeEntryId, TimeEntry timeEntryToUpdate);
 
-        return mockList;
-
-    }
-
-    public void update(long eq, TimeEntry any) {
-    }
-
-    public void delete(long timeEntryId) {
-    }
+    void delete(long timeEntryId);
 }
