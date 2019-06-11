@@ -32,6 +32,8 @@ public class TimeEntry {
     @Override
     public boolean equals(Object o){
 
+        //https://www.geeksforgeeks.org/overriding-equals-method-in-java/
+
         // If the object is compared with itself then return true
         if (o == this) {
             return true;
@@ -55,4 +57,4 @@ public class TimeEntry {
 
     }
 }
-}
+
