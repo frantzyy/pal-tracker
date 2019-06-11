@@ -2,10 +2,13 @@ package io.pivotal.pal.tracker;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RestController
+@RequestMapping("/time-entries")
 public class TimeEntryController {
     private final TimeEntryRepository timeEntryRepository;
 
@@ -13,7 +16,8 @@ public class TimeEntryController {
         this.timeEntryRepository = timeEntryRepository;
     }
 
-    public ResponseEntity create(TimeEntry timeEntryToCreate) {
+    @PostMapping
+    public ResponseEntity create(@RequestBody TimeEntry timeEntryToCreate) {
 
         TimeEntry newTimeEntryCreated = this.timeEntryRepository.create(timeEntryToCreate);
 
@@ -22,7 +26,8 @@ public class TimeEntryController {
         return responseEntity;
     }
 
-    public ResponseEntity<TimeEntry> read(long timeEntryId) {
+    @GetMapping("/{id}")
+    public ResponseEntity<TimeEntry> read(@PathVariable("id") long timeEntryId) {
 
 
         TimeEntry foundTimeEntry = this.timeEntryRepository.find(timeEntryId);
@@ -36,6 +41,7 @@ public class TimeEntryController {
         }
     }
 
+    @GetMapping
     public ResponseEntity<List<TimeEntry>> list() {
 
         List<TimeEntry> repoList  = this.timeEntryRepository.list();
@@ -43,7 +49,8 @@ public class TimeEntryController {
         return new ResponseEntity<List<TimeEntry>>(repoList, HttpStatus.OK);
     }
 
-    public ResponseEntity update(long timeEntryId, TimeEntry timeEntryToUpdate) {
+    @PutMapping("/{id}")
+    public ResponseEntity update(@PathVariable("id") long timeEntryId, @RequestBody TimeEntry timeEntryToUpdate) {
 
         TimeEntry newTimeEntryCreated = this.timeEntryRepository.update(timeEntryId, timeEntryToUpdate);
 
@@ -54,7 +61,8 @@ public class TimeEntryController {
         }
     }
 
-    public ResponseEntity delete(long timeEntryId) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") long timeEntryId) {
 
        this.timeEntryRepository.delete(timeEntryId);
 
