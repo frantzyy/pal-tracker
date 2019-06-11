@@ -20,3 +20,8 @@ cf restage pal-tracker
 cf set-env pal-tracker WELCOME_MESSAGE 'hellofrompal'
 
 
+* Run specific test
+./gradlew test --tests *InMemoryTimeEntryRepositoryTest
+
+
+
