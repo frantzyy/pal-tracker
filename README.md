@@ -23,5 +23,7 @@ cf set-env pal-tracker WELCOME_MESSAGE 'hellofrompal'
 * Run specific test
 ./gradlew test --tests *InMemoryTimeEntryRepositoryTest
 
+* Create DB
 
 
+cf create-service db-service silver mydb -c '{"ram_gb":4}'
