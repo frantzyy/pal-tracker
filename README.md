@@ -41,8 +41,12 @@
 * CF CLI logged in user
 `cf target`
 
-
-
+* Create time entry
+curl -i -XPOST -H"Content-Type: application/json" localhost:8080/time-entries -d"{\"projectId\": 1, \"userId\": 1, \"date\": \"2019-01-01\", \"hours\": 8}"
+curl -i -XPOST -H"Content-Type: application/json" localhost:8080/time-entries -d"{\"projectId\": 1, \"userId\": 2, \"date\": \"2019-01-01\", \"hours\": 6}"
+curl -i -XPOST -H"Content-Type: application/json" localhost:8080/time-entries -d"{\"projectId\": 1, \"userId\": 3, \"date\": \"2019-01-01\", \"hours\": 4}"
+curl -i -XPOST -H"Content-Type: application/json" localhost:8080/time-entries -d"{\"projectId\": 1, \"userId\": 4, \"date\": \"2019-01-01\", \"hours\": 2}"
+curl -i -XPOST -H"Content-Type: application/json" localhost:8080/time-entries -d"{\"projectId\": 1, \"userId\": 5, \"date\": \"2019-01-01\", \"hours\": 1}"
 
 * MySQL
 
