@@ -4,7 +4,9 @@ applications:
     path: build/libs/pal-tracker.jar
     routes:
       - route: pal-tracker-dan-art.apps.evans.pal.pivotal.io
+    services:
+      - tracker-database
     env:
       WELCOME_MESSAGE: Hello from the review environment
       JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ } }'
-      SPRING_DATASOURCE_URL: "jdbc:mysql://pal-tracker-dan-art.apps.evans.pal.pivotal.io/tracker_dev?user=tracker&useSSL=false&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false"
+#      SPRING_DATASOURCE_URL: "jdbc:mysql://q-n3s3y1.q-g6429.bosh:3306/service_instance_db?user=8315c43d0f0d40529d2ee725e9919b32\u0026password=nsk7mfk4xsnctheg\u0026useSSL=false"
