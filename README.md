@@ -4,6 +4,8 @@
 
 [CLI - Getting Started](https://docs.run.pivotal.io/cf-cli/getting-started.html)
 
+[Travis CI](https://travis-ci.org/)
+
 # Useful commands
 
 
