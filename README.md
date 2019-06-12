@@ -27,3 +27,5 @@ cf set-env pal-tracker WELCOME_MESSAGE 'hellofrompal'
 
 
 cf create-service db-service silver mydb -c '{"ram_gb":4}'
+
+trigger travis
