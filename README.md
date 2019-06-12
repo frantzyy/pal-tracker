@@ -24,8 +24,25 @@ cf set-env pal-tracker WELCOME_MESSAGE 'hellofrompal'
 ./gradlew test --tests *InMemoryTimeEntryRepositoryTest
 
 * Create DB
-
-
 cf create-service db-service silver mydb -c '{"ram_gb":4}'
 
-trigger travis
+
+* see VCAP properties
+cf env pal-tracker
+
+* CF CLI logged in user
+cf target
+
+https://docs.run.pivotal.io/cf-cli/getting-started.html
+
+
+* MySQL
+
+cf mysql tracker-database  (need to install cf plugin... need MySQL client installed locally and ssh turned on)
+
+alternatively you can ssh tunnel in
+
+
+show tables
+
+describe time_entries
